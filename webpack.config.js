@@ -1,7 +1,7 @@
 const path = require('path');
 const argv = require('yargs').argv;
 const isProduction = argv.mode === 'production';
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 var webAppConfig = {
@@ -36,6 +36,14 @@ var webAppConfig = {
 		]
     },
 	mode : isProduction ? 'production' : 'development',
+	plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'src/html', to: '' },
+            ],
+        }),
+		
+    ],
 	devtool : 'source-map',
 	optimization: {
 		usedExports: true,
